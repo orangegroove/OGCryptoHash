@@ -45,22 +45,22 @@
 	
 	switch (function) {
 		case OGCryptoHashFunctionMD5:
-			CC_MD5(self.UTF8String, self.length, buffer);
+			CC_MD5(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 		case OGCryptoHashFunctionSHA1:
-			CC_SHA1(self.UTF8String, self.length, buffer);
+			CC_SHA1(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 		case OGCryptoHashFunctionSHA224:
-			CC_SHA224(self.UTF8String, self.length, buffer);
+			CC_SHA224(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 		case OGCryptoHashFunctionSHA256:
-			CC_SHA256(self.UTF8String, self.length, buffer);
+			CC_SHA256(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 		case OGCryptoHashFunctionSHA384:
-			CC_SHA384(self.UTF8String, self.length, buffer);
+			CC_SHA384(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 		case OGCryptoHashFunctionSHA512:
-			CC_SHA512(self.UTF8String, self.length, buffer);
+			CC_SHA512(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
 	}
 	
