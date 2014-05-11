@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "OGCryptoHash"
-  s.version      = "0.1.6"
+  s.version      = "0.1.7"
   s.summary      = "Wrapper around CommonCrypto hash functions, MD5, SHA1, SHA224, SHA256, SHA384, and SHA512."
   s.homepage     = "https://github.com/OrangeGroove/OGCryptoHash"
   s.license      = { :type => "MIT" }
@@ -9,4 +9,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source_files = "OGCryptoHash/*.{h,m}"
   s.requires_arc = true
+  s.framework    = "SystemConfiguration"
 end
