@@ -6,7 +6,6 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT" }
   s.authors      = { "Jesper" => "jesper@orangegroove.net" }
   s.source       = { :git => "https://github.com/OrangeGroove/OGCryptoHash.git", :tag => s.version.to_s }
-  s.platform     = :ios, "7.0"
   s.source_files = "OGCryptoHash/*.{h,m}"
   s.requires_arc = true
   s.framework    = "SystemConfiguration"
