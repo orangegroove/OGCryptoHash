@@ -40,10 +40,10 @@
 	int len = [self digestLengthForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
-	if (len < 0)
-		return nil;
+	if (len < 0) return nil;
 	
-	switch (function) {
+	switch (function)
+    {
 		case OGCryptoHashFunctionMD5:
 			CC_MD5(self.UTF8String, (CC_LONG)self.length, buffer);
 			break;
@@ -69,12 +69,11 @@
 
 - (NSData *)dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
 {
-	int len					= [self digestLengthForCryptoHashFunction:function];
-	CCHmacAlgorithm algo	= [self hmacAlgorithmForCryptoHashFunction:function];
+	int len              = [self digestLengthForCryptoHashFunction:function];
+	CCHmacAlgorithm algo = [self hmacAlgorithmForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
-	if (len < 0 || algo == UINT32_MAX)
-		return nil;
+	if (len < 0 || algo == UINT32_MAX) return nil;
 	
 	CCHmac(algo, key.UTF8String, key.length, self.UTF8String, self.length, buffer);
 	return [NSData dataWithBytes:buffer length:len];
@@ -84,7 +83,8 @@
 
 - (int)digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
 {
-	switch (function) {
+	switch (function)
+    {
 		case OGCryptoHashFunctionMD5:
 			return CC_MD5_DIGEST_LENGTH;
 		case OGCryptoHashFunctionSHA1:
@@ -104,7 +104,8 @@
 
 - (CCHmacAlgorithm)hmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function
 {
-	switch (function) {
+	switch (function)
+    {
 		case OGCryptoHashFunctionMD5:
 			return kCCHmacAlgMD5;
 		case OGCryptoHashFunctionSHA1:
