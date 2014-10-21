@@ -31,7 +31,7 @@
 
 - (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function
 {
-	int len = [self _digestLengthForCryptoHashFunction:function];
+	int len = [self _ogDigestLengthForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
 	if (len < 0) return nil;
@@ -63,8 +63,8 @@
 
 - (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
 {
-	int len              = [self _digestLengthForCryptoHashFunction:function];
-	CCHmacAlgorithm algo = [self _hmacAlgorithmForCryptoHashFunction:function];
+	int len              = [self _ogDigestLengthForCryptoHashFunction:function];
+	CCHmacAlgorithm algo = [self _ogHmacAlgorithmForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
 	if (len < 0 || algo == UINT32_MAX) return nil;
@@ -75,17 +75,17 @@
 
 - (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function
 {
-    return [self.class _hexadecimalString:[self og_dataUsingCryptoHashFunction:function]];
+    return [self.class _ogHexadecimalString:[self og_dataUsingCryptoHashFunction:function]];
 }
 
 - (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
 {
-    return [self.class _hexadecimalString:[self og_dataUsingCryptoHashFunction:function hmacSignedWithKey:key]];
+    return [self.class _ogHexadecimalString:[self og_dataUsingCryptoHashFunction:function hmacSignedWithKey:key]];
 }
 
 #pragma mark - Private
 
-- (int)_digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
+- (int)_ogDigestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
 {
 	switch (function)
     {
@@ -106,7 +106,7 @@
 	}
 }
 
-- (CCHmacAlgorithm)_hmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function
+- (CCHmacAlgorithm)_ogHmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function
 {
 	switch (function)
     {
@@ -127,7 +127,7 @@
 	}
 }
 
-+ (NSString *)_hexadecimalString:(NSData *)data
++ (NSString *)_ogHexadecimalString:(NSData *)data
 {
     const unsigned char* buffer = data.bytes;
     NSUInteger length			= data.length;
