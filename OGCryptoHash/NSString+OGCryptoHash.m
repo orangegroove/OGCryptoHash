@@ -73,6 +73,16 @@
 	return [NSData dataWithBytes:buffer length:len];
 }
 
+- (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function
+{
+    return [self.class _hexadecimalString:[self og_dataUsingCryptoHashFunction:function]];
+}
+
+- (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
+{
+    return [self.class _hexadecimalString:[self og_dataUsingCryptoHashFunction:function hmacSignedWithKey:key]];
+}
+
 #pragma mark - Private
 
 - (int)_digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
@@ -115,6 +125,23 @@
 		default:
 			return UINT32_MAX;
 	}
+}
+
++ (NSString *)_hexadecimalString:(NSData *)data
+{
+    const unsigned char* buffer = data.bytes;
+    NSUInteger length			= data.length;
+    
+    if (!buffer || !length) return nil;
+    
+    NSMutableString* string	= [NSMutableString stringWithCapacity:length*2];
+    
+    for (NSUInteger i = 0; i < length; i++)
+    {
+        [string appendFormat:@"%02x", buffer[i]];
+    }
+    
+    return [NSString stringWithString:string];
 }
 
 @end

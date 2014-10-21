@@ -28,6 +28,9 @@
 
 @import Foundation;
 
+/**
+ The available hash functions.
+ */
 typedef NS_ENUM(NSUInteger, OGCryptoHashFunction)
 {
 	OGCryptoHashFunctionMD5,
@@ -43,16 +46,31 @@ typedef NS_ENUM(NSUInteger, OGCryptoHashFunction)
 /**
  Hashes a string.
  @param function The hash function to use.
- @return The hashed string as a series of bytes.
+ @return The hashed string as bytes.
  */
 - (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function;
 
 /**
- Hashes a string and signs it with HMAC.
+ Hashes a string and HMAC signs it.
  @param function The hash function to use.
  @param key The HMAC key.
- @return The hashed string as a series of bytes.
+ @return The hashed string as bytes.
  */
 - (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key;
+
+/**
+ Hashes a string.
+ @param function The hash function to use.
+ @return The hashed string as a string of hexadecimal bytes.
+ */
+- (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function;
+
+/**
+ Hashes a string and HMAC signs it.
+ @param function The hash function to use.
+ @param key The HMAC key.
+ @return The hashed string as a string of hexadecimal bytes.
+ */
+- (NSString *)og_stringUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key;
 
 @end
