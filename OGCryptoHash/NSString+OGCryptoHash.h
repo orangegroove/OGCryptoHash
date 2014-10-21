@@ -22,6 +22,10 @@
 //  IN THE SOFTWARE.
 //
 
+/*
+ Category that wraps string hashing and hmac signing functions.
+ */
+
 @import Foundation;
 
 typedef NS_ENUM(NSUInteger, OGCryptoHashFunction)
@@ -37,13 +41,18 @@ typedef NS_ENUM(NSUInteger, OGCryptoHashFunction)
 @interface NSString (OGCryptoHash)
 
 /**
- 
+ Hashes a string.
+ @param function The hash function to use.
+ @return The hashed string as a series of bytes.
  */
-- (NSData *)dataUsingCryptoHashFunction:(OGCryptoHashFunction)function;
+- (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function;
 
 /**
- 
+ Hashes a string and signs it with HMAC.
+ @param function The hash function to use.
+ @param key The HMAC key.
+ @return The hashed string as a series of bytes.
  */
-- (NSData *)dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key;
+- (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key;
 
 @end

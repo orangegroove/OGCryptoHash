@@ -25,19 +25,13 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import "NSString+OGCryptoHash.h"
 
-@interface NSString (OGCryptoHashPrivate)
-
-- (int)digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function;
-- (CCHmacAlgorithm)hmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function;
-
-@end
 @implementation NSString (OGCryptoHash)
 
 #pragma mark - Public
 
-- (NSData *)dataUsingCryptoHashFunction:(OGCryptoHashFunction)function
+- (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function
 {
-	int len = [self digestLengthForCryptoHashFunction:function];
+	int len = [self _digestLengthForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
 	if (len < 0) return nil;
@@ -67,10 +61,10 @@
 	return [NSData dataWithBytes:buffer length:len];
 }
 
-- (NSData *)dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
+- (NSData *)og_dataUsingCryptoHashFunction:(OGCryptoHashFunction)function hmacSignedWithKey:(NSString *)key
 {
-	int len              = [self digestLengthForCryptoHashFunction:function];
-	CCHmacAlgorithm algo = [self hmacAlgorithmForCryptoHashFunction:function];
+	int len              = [self _digestLengthForCryptoHashFunction:function];
+	CCHmacAlgorithm algo = [self _hmacAlgorithmForCryptoHashFunction:function];
 	unsigned char buffer[len];
 	
 	if (len < 0 || algo == UINT32_MAX) return nil;
@@ -81,7 +75,7 @@
 
 #pragma mark - Private
 
-- (int)digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
+- (int)_digestLengthForCryptoHashFunction:(OGCryptoHashFunction)function
 {
 	switch (function)
     {
@@ -102,7 +96,7 @@
 	}
 }
 
-- (CCHmacAlgorithm)hmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function
+- (CCHmacAlgorithm)_hmacAlgorithmForCryptoHashFunction:(OGCryptoHashFunction)function
 {
 	switch (function)
     {
